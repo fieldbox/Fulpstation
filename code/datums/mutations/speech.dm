@@ -202,3 +202,38 @@
 	..()
 	owner.remove_language(/datum/language/beachbum, TRUE, TRUE, LANGUAGE_STONER)
 	owner.remove_blocked_language(subtypesof(/datum/language) - /datum/language/beachbum, LANGUAGE_STONER)
+
+/datum/mutation/human/FSD
+	name = "F.S.D"
+	desc = "A horrible mutation that causes the holder to speak as if they were a felinid and stutter. Stands for Feline Speaking Disorder."
+	quality = MINOR_NEGATIVE
+	text_gain_indication = "<span class='notice'>You feew wike a degenyewate, nya~!.</span>"
+	text_lose_indication = "<span class='notice'>You no longer feel like making a fool of yourself.</span>"
+
+/datum/mutation/human/FSD/on_acquiring(mob/living/carbon/human/owner)
+	if(..())
+		return
+	RegisterSignal(owner, COMSIG_MOB_SAY, .proc/handle_speech)
+
+/datum/mutation/human/FSD/on_losing(mob/living/carbon/human/owner)
+	if(..())
+		return
+	UnregisterSignal(owner, COSMIG_MOB_SAY)
+
+/datum/mutation/human/FSD/proc/handle_speech(datum/source, list/speech_args)
+	var/message = speech_args[SPEECH_MESSAGE]
+	if(message)
+		message = " [message] "
+		message = replacetext(message," r "," w ")
+		message = replacetext(message," l "," w ")
+		message = replacetext(message," the "," de ")
+		message = replacetext(message," th "," ff ")
+		message = replacetext(message," na "," nya ")
+		message = replacetext(message," ne "," nye ")
+		message = replacetext(message," ni "," nyi ")
+		message = replacetext(message," no "," nyo ")
+		message = replacetext(message," nu "," nyu ")
+		message = replacetext(message," ove "," uv ")
+		message = replacetext(message," fuck "," fucky wucky")
+		message += pick(" owo!"," uwu!"," nya~!")
+		speech_args[SPEECH_MESSAGE] = trim(message)

@@ -432,6 +432,14 @@
 	name = "\improper DNA injector (Anti-Antiglowy)"
 	remove_mutations = list(ANTIGLOWY)
 
+/obj/item/dnainjector/fsd
+	name = "\improper DNA injector (F.S.D)"
+	add_mutations = list(FSD)
+
+/obj/item/dnainjector/fsd
+	name = "\improper DNA injector (Anti-F.S.D)"
+	remove_mutations = list(FSD)
+
 /obj/item/dnainjector/timed
 	var/duration = 600
 
